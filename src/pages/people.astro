@@ -19,8 +19,8 @@ import Layout from "../layouts/Layout.astro";
         <h3>Qichen Song</h3>
         <p class="role">Assistant Professor</p>
         <p class="affil">
-          Department of Mechanical and Aerospace Engineering<br />
-          Rutgers, The State University of New Jersey
+          <a href="https://mae.rutgers.edu/">Department of Mechanical and Aerospace Engineering</a><br />
+          <a href="https://www.rutgers.edu/">Rutgers, The State University of New Jersey</a>
         </p>
         <p class="bio">
           I am an Assistant Professor in the Department of Mechanical and
@@ -28,7 +28,7 @@ import Layout from "../layouts/Layout.astro";
           Previously, I was a Harvard Quantum Initiative Postdoctoral Fellow at
           Harvard University, hosted by Prof. Jarad A. Mason in the Department
           of Chemistry and Chemical Biology, and worked closely with Prof. Julia
-          A. Mundy in the Department of Physics. In January 2022, I obtained my
+          A. Mundy in the Department of Physics. In 2022, I obtained my
           Ph.D. in Mechanical Engineering from MIT, advised by Prof. Gang Chen.
         </p>
         <p class="bio">
@@ -126,6 +126,17 @@ import Layout from "../layouts/Layout.astro";
     color: var(--text-muted);
     line-height: 1.5;
     margin-bottom: 0.75rem;
+  }
+
+  .affil a {
+    color: var(--text-muted);
+    text-decoration: underline;
+    text-decoration-color: var(--border);
+    transition: color 0.15s;
+  }
+
+  .affil a:hover {
+    color: var(--text);
   }
 
   .bio {
