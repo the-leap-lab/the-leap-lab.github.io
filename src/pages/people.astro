@@ -1,0 +1,172 @@
+---
+import Layout from "../layouts/Layout.astro";
+---
+
+<Layout title="People" description="Members of the LEAP Lab at Rutgers University">
+  <section class="page-header">
+    <h1>People</h1>
+    <p class="subtitle">
+      We are a growing group of researchers at Rutgers University working at the
+      intersection of energy systems and artificial intelligence.
+    </p>
+  </section>
+
+  <section class="group">
+    <h2 class="group-label">Principal Investigator</h2>
+    <div class="person pi">
+      <img class="person-photo" src="/images/qs.jpg" alt="Qichen Song" />
+      <div class="person-info">
+        <h3>Qichen Song</h3>
+        <p class="role">Assistant Professor</p>
+        <p class="affil">
+          Department of Mechanical and Aerospace Engineering<br />
+          Rutgers, The State University of New Jersey
+        </p>
+        <p class="bio">
+          I am an Assistant Professor in the Department of Mechanical and
+          Aerospace Engineering at Rutgers University since September 2026.
+          Previously, I was a Harvard Quantum Initiative Postdoctoral Fellow at
+          Harvard University, hosted by Prof. Jarad A. Mason in the Department
+          of Chemistry and Chemical Biology, and worked closely with Prof. Julia
+          A. Mundy in the Department of Physics. In January 2022, I obtained my
+          Ph.D. in Mechanical Engineering from MIT, advised by Prof. Gang Chen.
+        </p>
+        <p class="bio">
+          I am interested in understanding, manipulating, and optimizing the
+          conversion, transfer, and storage of energy in stimuli-responsive
+          materials and energy systems, using tools including laser
+          spectroscopy, synthetic chemistry, and ab initio calculations, to
+          address challenges in energy and sustainability research.
+        </p>
+        <div class="person-links">
+          <a href="mailto:qichen.song@rutgers.edu">qichen.song@rutgers.edu</a>
+          <!-- <a href="">CV</a> -->
+          <!-- <a href="">Google Scholar</a> -->
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="group">
+    <h2 class="group-label">Graduate Students</h2>
+    <p class="placeholder-note">Openings available — see <a href="/contact">Contact</a> for information.</p>
+  </section>
+
+  <section class="group">
+    <h2 class="group-label">Undergraduate Researchers</h2>
+    <p class="placeholder-note">Coming soon.</p>
+  </section>
+</Layout>
+
+<style>
+  .page-header {
+    padding-bottom: 2.5rem;
+    border-bottom: 1px solid var(--border);
+    margin-bottom: 2.5rem;
+  }
+
+  h1 {
+    font-size: 2.4rem;
+    font-weight: 800;
+    letter-spacing: -0.03em;
+    margin-bottom: 0.75rem;
+  }
+
+  .subtitle {
+    font-size: 1rem;
+    color: var(--text-muted);
+    max-width: 600px;
+    line-height: 1.7;
+  }
+
+  .group {
+    margin-bottom: 3rem;
+  }
+
+  .group-label {
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    margin-bottom: 1.5rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .person {
+    display: flex;
+    gap: 2rem;
+    align-items: flex-start;
+  }
+
+  .person-photo {
+    width: 120px;
+    height: 120px;
+    border-radius: 4px;
+    object-fit: cover;
+    flex-shrink: 0;
+  }
+
+  .person-info h3 {
+    font-size: 1.2rem;
+    font-weight: 700;
+    margin-bottom: 0.25rem;
+  }
+
+  .role {
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: var(--accent);
+    margin-bottom: 0.25rem;
+  }
+
+  .affil {
+    font-size: 0.85rem;
+    color: var(--text-muted);
+    line-height: 1.5;
+    margin-bottom: 0.75rem;
+  }
+
+  .bio {
+    font-size: 0.9rem;
+    color: var(--text-muted);
+    line-height: 1.7;
+    max-width: 520px;
+    margin-bottom: 0.75rem;
+  }
+
+  .person-links {
+    display: flex;
+    gap: 1rem;
+  }
+
+  .person-links a {
+    font-size: 0.85rem;
+    color: var(--text);
+    text-decoration: none;
+    border-bottom: 1px solid var(--border);
+    padding-bottom: 1px;
+    transition: border-color 0.15s;
+  }
+
+  .person-links a:hover {
+    border-color: var(--text);
+  }
+
+  .placeholder-note {
+    font-size: 0.85rem;
+    color: #aaa;
+    font-style: italic;
+  }
+
+  .placeholder-note a {
+    color: var(--text-muted);
+  }
+
+  @media (max-width: 480px) {
+    .person {
+      flex-direction: column;
+    }
+  }
+</style>

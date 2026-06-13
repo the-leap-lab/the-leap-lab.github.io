@@ -1,0 +1,366 @@
+---
+import Layout from "../layouts/Layout.astro";
+
+const pubs = [
+  {
+    year: "2026",
+    items: [
+      {
+        title: "Reversible regulation of thermal conductivity through spin-crossover transitions",
+        authors: ["<strong>Qichen Song</strong>", "Rahil Ukani", "Vidhya Dev", "Jungwoo Shin", "Jinyoung Seo", "Hong Ki Kim", "Caleb Stamper", "Ryan McGillicuddy", "Catherine Thai", "Dehong Yu", "Gang Chen", "Jarad A. Mason*"],
+        venue: "<em>J. Am. Chem. Soc.</em>, 2026",
+        links: [{ label: "PDF", url: "https://qichensong.github.io/Manuscript.pdf" }],
+      },
+      {
+        title: "Observation of microscopic domain effects in the metal-insulator transition of thin-film NdNiO₃",
+        authors: ["Lucy S. Nathwani", "Anne Ruperto", "Ashvini Vallipuram", "Abigail Y. Jiang", "Grace A. Pan", "Dan Ferenc Segedin", "Ari B. Turkiewicz", "Charles M. Brooks", "Jarad A. Mason*", "<strong>Qichen Song</strong>*", "Julia A. Mundy*"],
+        venue: "<em>Nano Lett.</em>, 2026, 26, 4027–4033",
+        links: [{ label: "DOI", url: "https://pubs.acs.org/doi/abs/10.1021/acs.nanolett.5c04522" }],
+      },
+    ],
+  },
+  {
+    year: "2024",
+    items: [
+      {
+        title: "Virtual node graph neural network for full phonon prediction",
+        authors: ["Ryotaro Okabe", "Abhijatmedhi Chotrattanapituk", "Artittaya Boonkird", "Nina Andrejevic", "Xiang Fu", "Tommi S. Jaakkola", "<strong>Qichen Song</strong>", "Thanh Nguyen", "Nathan Drucker", "Sai Mu", "Bolin Liao", "Yongqiang Cheng", "Mingda Li"],
+        venue: "<em>Nature Computational Science</em>, 2024, 4, 522–531",
+        links: [{ label: "DOI", url: "https://www.nature.com/articles/s43588-024-00661-0" }],
+      },
+      {
+        title: "Probing carrier and phonon transport in semiconductors all at once through frequency-domain photoreflectance",
+        authors: ["<strong>Qichen Song</strong>*", "Sorren Warkander", "Samuel C. Huberman*"],
+        venue: "<em>Phys. Rev. Applied</em>, 2024, 21, 034044",
+        links: [{ label: "DOI", url: "https://journals.aps.org/prapplied/abstract/10.1103/PhysRevApplied.21.034044" }],
+      },
+    ],
+  },
+  {
+    year: "2023",
+    items: [
+      {
+        title: "Effect of twist angle on interfacial thermal transport in two-dimensional bilayers",
+        authors: ["Lenan Zhang*", "Yang Zhong", "Xiangyu Li", "Ji-Hoon Park", "<strong>Qichen Song</strong>", "Long Li", "Liang Guo", "Jing Kong*", "Gang Chen*"],
+        venue: "<em>Nano Lett.</em>, 2023, 23, 7790–7796",
+        links: [{ label: "DOI", url: "https://pubs.acs.org/doi/abs/10.1021/acs.nanolett.3c01050" }],
+      },
+    ],
+  },
+  {
+    year: "2022",
+    items: [
+      {
+        title: "Simultaneous enhancement in electrical conductivity and Seebeck coefficient by single- to double-valley transition in a Dirac-like band",
+        authors: ["Yu Dai", "Wenjiang Zhou", "Hyun-Jung Kim", "<strong>Qichen Song</strong>", "Xin Qian", "Te-Huan Liu*", "Ronggui Yang*"],
+        venue: "<em>npj Computational Materials</em>, 2022, 8, 234",
+        links: [{ label: "DOI", url: "https://www.nature.com/articles/s41524-022-00927-z" }],
+      },
+      {
+        title: "Panoramic mapping of phonon transport from ultrafast electron diffraction and scientific machine learning",
+        authors: ["Zhantao Chen*", "Xiaozhe Shen*", "Nina Andrejevic", "Tongtong Liu", "Duan Luo", "Thanh Nguyen", "Nathan C. Drucker", "Michael E. Kozina", "<strong>Qichen Song</strong>", "Chengyun Hua", "Gang Chen", "Xijie Wang", "Jing Kong", "Mingda Li*"],
+        venue: "<em>Adv. Mater.</em>, 2022, 35, 2206997",
+        links: [{ label: "DOI", url: "https://onlinelibrary.wiley.com/doi/full/10.1002/adma.202206997" }],
+      },
+      {
+        title: "Nanoscale imaging of phonon dynamics by electron microscopy",
+        authors: ["Chaitanya A. Gadre#", "Xingxu Yan#", "<strong>Qichen Song</strong>", "Jie Li", "Lei Gu", "Toshihiro Aoki", "Sheng-Wei Lee", "Gang Chen", "Ruqian Wu", "Xiaoqing Pan*"],
+        venue: "<em>Nature</em>, 2022, 606, 292–297",
+        links: [{ label: "DOI", url: "https://www.nature.com/articles/s41586-022-04736-8" }],
+      },
+      {
+        title: "Significant reduction in semiconductor interface resistance via interfacial atomic mixing",
+        authors: ["<strong>Qichen Song</strong>", "Jiawei Zhou", "Gang Chen*"],
+        venue: "<em>Phys. Rev. B</em>, 2022, 105, 195306",
+        links: [{ label: "DOI", url: "https://journals.aps.org/prb/abstract/10.1103/PhysRevB.105.195306" }],
+      },
+      {
+        title: "Mobility enhancement in heavily doped semiconductors via electron cloaking",
+        authors: ["Jiawei Zhou*", "Hangtian Zhu", "<strong>Qichen Song</strong>", "Zhiwei Ding", "Jun Mao", "Zhifeng Ren", "Gang Chen*"],
+        venue: "<em>Nat. Commun.</em>, 2022, 13, 2482",
+        links: [{ label: "DOI", url: "https://www.nature.com/articles/s41467-022-29958-2" }],
+      },
+    ],
+  },
+  {
+    year: "2021",
+    items: [
+      {
+        title: "Toward optimal heat transfer of 2D–3D heterostructures via van der Waals binding effects",
+        authors: ["Lenan Zhang", "Yang Zhong", "Xin Qian", "<strong>Qichen Song</strong>", "Jiawei Zhou", "Long Li", "Liang Guo*", "Gang Chen*", "Evelyn N. Wang*"],
+        venue: "<em>ACS Appl. Mater. Interfaces</em>, 2021, 13, 46055–46064",
+        links: [{ label: "DOI", url: "https://pubs.acs.org/doi/10.1021/acsami.1c08131" }],
+      },
+      {
+        title: "Evaluation of diffuse mismatch model for phonon scattering at disordered interfaces",
+        authors: ["<strong>Qichen Song</strong>*", "Gang Chen"],
+        venue: "<em>Phys. Rev. B</em>, 2021, 104, 085310",
+        links: [{ label: "DOI", url: "https://journals.aps.org/prb/abstract/10.1103/PhysRevB.104.085310" }],
+      },
+      {
+        title: "Signature of many-body localization of phonons in strongly disordered superlattices",
+        authors: ["Thanh Nguyen", "Nina Andrejevic", "Hoi Chun Po", "<strong>Qichen Song</strong>", "Yoichiro Tsurimaki", "Nathan C. Drucker", "Ahmet Alatas", "Esen E. Alp", "Bogdan M. Leu", "Alessandro Cunsolo", "Yong Q. Cai", "Lijun Wu", "Joseph A. Garlow", "Yimei Zhu", "Hong Lu", "Arthur C. Gossard", "Alexander A. Puretzky", "David B. Geohegan", "Shengxi Huang*", "Mingda Li*"],
+        venue: "<em>Nano Lett.</em>, 2021, 21, 7419–7425",
+        links: [{ label: "DOI", url: "https://pubs.acs.org/doi/10.1021/acs.nanolett.1c01905" }],
+      },
+      {
+        title: "Frank-van der Merwe growth in bilayer graphene",
+        authors: ["Haozhe Wang", "Zhenpeng Yao", "Gang Seob Jung", "<strong>Qichen Song</strong>", "Marek Hempel", "Tomas Palacios", "Gang Chen", "Markus J. Buehler", "Alan Aspuru-Guzik", "Jing Kong*"],
+        venue: "<em>Matter</em>, 2021, 4, 3339–3353",
+        links: [{ label: "DOI", url: "https://www.sciencedirect.com/science/article/abs/pii/S2590238521004112?via%3Dihub" }],
+      },
+    ],
+  },
+  {
+    year: "2020",
+    items: [
+      {
+        title: "Intermediate-level doping strategy to simultaneously optimize power factor and phonon thermal conductivity for improving thermoelectric figure of merit",
+        authors: ["Wuyang Ren", "<strong>Qichen Song</strong>", "Hangtian Zhu", "Jun Mao", "Li You", "Geethal Amila Gamage", "Jiawei Zhou", "Ting Zhou", "Jing Jiang", "Chao Wang", "Jun Luo", "Jiang Wu", "Zhiming Wang*", "Gang Chen*", "Zhifeng Ren*"],
+        venue: "<em>Materials Today Physics</em>, 2020, 15, 100250",
+        links: [{ label: "DOI", url: "https://www.sciencedirect.com/science/article/abs/pii/S2542529320300742?via%3Dihub" }],
+      },
+      {
+        title: "Bi-directional tuning of thermal transport in SrCoOₓ with electrochemically induced phase transitions",
+        authors: ["Qiyang Lu", "Samuel Huberman", "Hantao Zhang", "<strong>Qichen Song</strong>", "Jiayue Wang", "Gulin Vardar", "Adrian Hunt", "Iradwikanari Waluyo", "Gang Chen*", "Bilge Yildiz*"],
+        venue: "<em>Nat. Mater.</em>, 2020, 19, 655–662",
+        links: [{ label: "DOI", url: "https://www.nature.com/articles/s41563-020-0612-0" }],
+      },
+      {
+        title: "Ultrahigh thermal conductivity in isotope-enriched cubic boron nitride",
+        authors: ["Ke Chen#", "Bai Song#*", "Navaneetha K. Ravichandran", "Qiye Zheng", "Xi Chen", "Hwijong Lee", "Haoran Sun", "Sheng Li", "Geethal Amila Gamage", "Fei Tian", "Zhiwei Ding", "<strong>Qichen Song</strong>", "Akash Rai", "Hanlin Wu", "Pawan Koirala", "Aaron J. Schmidt", "Kenji Watanabe", "Bing Lv", "Zhifeng Ren", "Li Shi", "David G. Cahill", "Takashi Taniguchi", "David Broido*", "Gang Chen*"],
+        venue: "<em>Science</em>, 2020, 367, 555–559",
+        links: [{ label: "DOI", url: "https://science.sciencemag.org/content/367/6477/555.abstract" }],
+      },
+    ],
+  },
+  {
+    year: "2019",
+    items: [
+      {
+        title: "Discovery of TaFeSb-based half-Heuslers with high thermoelectric performance",
+        authors: ["Hangtian Zhu", "Jun Mao", "Yuwei Li", "Jifeng Sun", "Yumei Wang", "Qing Zhu", "Guannan Li", "<strong>Qichen Song</strong>", "Jiawei Zhou", "Yuhao Fu", "Ran He", "Tian Tong", "Zihang Liu", "Wuyang Ren", "Li You", "Zhiming Wang", "Jun Luo", "Andrei Sotnikov", "Jiming Bao", "Kornelius Nielsch", "Gang Chen", "David J. Singh*", "Zhifeng Ren*"],
+        venue: "<em>Nat. Commun.</em>, 2019, 10, 270",
+        links: [{ label: "DOI", url: "https://www.nature.com/articles/s41467-018-08223-5" }],
+      },
+      {
+        title: "Electromagnetic and chemical enhancements of surface-enhanced Raman scattering spectra from Cu₂O hexagonal nanoplates",
+        authors: ["Chang Liu", "<strong>Qichen Song</strong>", "Jianan Chen", "Xinhao Li", "Jingxuan Cai", "Zhouguang Lu", "Wendi Li", "Nicholas X. Fang*", "Shien-Ping Feng*"],
+        venue: "<em>Adv. Mater. Interfaces</em>, 2019, 6, 1900534",
+        links: [{ label: "DOI", url: "https://onlinelibrary.wiley.com/doi/full/10.1002/admi.201900534" }],
+      },
+    ],
+  },
+  {
+    year: "2018",
+    items: [
+      {
+        title: "Simultaneously high electron and hole mobilities in cubic boron-V compounds: BP, BAs and BSb",
+        authors: ["Te-Huan Liu", "Bai Song", "Laureen Meroueh", "Zhiwei Ding", "<strong>Qichen Song</strong>", "Jiawei Zhou", "Mingda Li", "Gang Chen*"],
+        venue: "<em>Phys. Rev. B</em>, 2018, 98, 081203",
+        links: [{ label: "DOI", url: "https://journals.aps.org/prb/abstract/10.1103/PhysRevB.98.081203" }],
+      },
+      {
+        title: "Large thermoelectric power factor from crystal symmetry-protected non-bonding orbital in half-Heuslers",
+        authors: ["Jiawei Zhou", "Hangtian Zhu", "Te-Huan Liu", "<strong>Qichen Song</strong>", "Ran He", "Jun Mao", "Zihang Liu", "Wuyang Ren", "Bolin Liao", "David J. Singh", "Zhifeng Ren*", "Gang Chen*"],
+        venue: "<em>Nat. Commun.</em>, 2018, 9, 1721",
+        links: [{ label: "DOI", url: "https://www.nature.com/articles/s41467-018-03866-w" }],
+      },
+      {
+        title: "Deep defect level engineering: a strategy of optimizing the carrier concentration for high thermoelectric performance",
+        authors: ["Qian Zhang*", "<strong>Qichen Song</strong>", "Xinyu Wang", "Jingying Sun", "Qing Zhu", "Keshab Dahal", "Xi Lin", "Feng Cao", "Jiawei Zhou", "Shuo Chen", "Gang Chen", "Jun Mao*", "Zhifeng Ren*"],
+        venue: "<em>Energy Environ. Sci.</em>, 2018, 11, 933–940",
+        links: [{ label: "DOI", url: "http://pubs.rsc.org/en/content/articlehtml/2018/ee/c8ee00112j" }],
+      },
+      {
+        title: "Electron mean-free-path filtering in Dirac material for improved thermoelectric performance",
+        authors: ["Te-Huan Liu", "Jiawei Zhou", "Mingda Li", "Zhiwei Ding", "<strong>Qichen Song</strong>", "Bolin Liao", "Liang Fu", "Gang Chen*"],
+        venue: "<em>Proc. Natl. Acad. Sci.</em>, 2018, 115, 879–884",
+        links: [{ label: "DOI", url: "http://www.pnas.org/content/early/2018/01/09/1715477115.short" }],
+      },
+    ],
+  },
+  {
+    year: "2017",
+    items: [
+      {
+        title: "Dirac-electron-mediated magnetic proximity effect in topological insulator/magnetic insulator heterostructures",
+        authors: ["Mingda Li*", "<strong>Qichen Song</strong>", "Weiwei Zhao", "Joseph A. Garlow", "Te-Huan Liu", "Lijun Wu", "Yimei Zhu", "Jagadeesh S. Moodera", "Moses H. W. Chan", "Gang Chen*", "Cui-Zu Chang*"],
+        venue: "<em>Phys. Rev. B</em>, 2017, 96, 201301",
+        links: [{ label: "DOI", url: "https://journals.aps.org/prb/abstract/10.1103/PhysRevB.96.201301" }],
+      },
+      {
+        title: "Ab initio study of electron mean free paths and thermoelectric properties of lead telluride",
+        authors: ["<strong>Qichen Song</strong>", "Te-Huan Liu", "Jiawei Zhou", "Zhiwei Ding", "Gang Chen*"],
+        venue: "<em>Materials Today Physics</em>, 2017, 2, 69–77",
+        links: [{ label: "DOI", url: "http://www.sciencedirect.com/science/article/pii/S2542529317301256" }],
+      },
+      {
+        title: "Generalized two-temperature model for coupled phonons in nanosized graphene",
+        authors: ["Meng An#", "<strong>Qichen Song</strong>#", "Xiaoxiang Yu", "Zelin Jin", "Dengke Ma", "Baoling Huang", "Nuo Yang*"],
+        venue: "<em>Nano Lett.</em>, 2017, 17, 5805–5810",
+        links: [{ label: "DOI", url: "http://pubs.acs.org/doi/abs/10.1021/acs.nanolett.7b02926" }],
+      },
+      {
+        title: "Tailoring superconductivity with quantum dislocations",
+        authors: ["Mingda Li*", "<strong>Qichen Song</strong>", "Te-Huan Liu", "Laureen Meroueh", "Gerald D. Mahan", "Mildred S. Dresselhaus", "Gang Chen*"],
+        venue: "<em>Nano Lett.</em>, 2017, 17, 4604–4610",
+        links: [{ label: "DOI", url: "http://pubs.acs.org/doi/abs/10.1021/acs.nanolett.7b00977" }],
+      },
+    ],
+  },
+  {
+    year: "2016",
+    items: [
+      {
+        title: "The effect of shallow vs. deep level doping on the performance of thermoelectric materials",
+        authors: ["<strong>Qichen Song</strong>", "Jiawei Zhou", "Laureen Meroueh", "David Broido", "Zhifeng Ren", "Gang Chen*"],
+        venue: "<em>Appl. Phys. Lett.</em>, 2016, 109, 263902",
+        links: [{ label: "DOI", url: "http://aip.scitation.org/doi/10.1063/1.4973292" }],
+      },
+      {
+        title: "The adjustable thermal resistor by reversibly folding a graphene sheet",
+        authors: ["<strong>Qichen Song</strong>#", "Meng An#", "Xiandong Chen", "Zhan Peng", "Jianfeng Zang", "Nuo Yang*"],
+        venue: "<em>Nanoscale</em>, 2016, 8, 14943–14949",
+        links: [{ label: "DOI", url: "http://pubs.rsc.org/en/content/articlelanding/2016/nr/c6nr01992g#!divAbstract" }],
+      },
+    ],
+  },
+];
+---
+
+<Layout title="Publications" description="Publications from the LEAP Lab at Rutgers University">
+  <section class="page-header">
+    <h1>Publications</h1>
+    <p class="subtitle">
+      Peer-reviewed journal articles, conference papers, and preprints from LEAP Lab.
+    </p>
+  </section>
+
+  {pubs.map((group) => (
+    <section class="pub-year">
+      <h2 class="year-label">{group.year}</h2>
+      <ol class="pub-list">
+        {group.items.map((item) => (
+          <li class="pub-item">
+            <p class="pub-title">{item.title}</p>
+            <p class="pub-authors" set:html={item.authors.join(", ")} />
+            <p class="pub-venue" set:html={item.venue} />
+            <div class="pub-links">
+              {item.links.map((link) => (
+                <a href={link.url} target="_blank" rel="noopener">{link.label}</a>
+              ))}
+            </div>
+          </li>
+        ))}
+      </ol>
+    </section>
+  ))}
+
+  <p class="scholar-note">
+    * Corresponding author. # Equal contribution.
+  </p>
+  <p class="scholar-note">
+    For citation counts and the most up-to-date list, see
+    <a href="https://scholar.google.com/citations?user=RVTEIugAAAAJ&hl=en" target="_blank" rel="noopener">Google Scholar</a>.
+  </p>
+</Layout>
+
+<style>
+  .page-header {
+    padding-bottom: 2.5rem;
+    border-bottom: 1px solid var(--border);
+    margin-bottom: 2.5rem;
+  }
+
+  h1 {
+    font-size: 2.4rem;
+    font-weight: 800;
+    letter-spacing: -0.03em;
+    margin-bottom: 0.75rem;
+  }
+
+  .subtitle {
+    font-size: 1rem;
+    color: var(--text-muted);
+    max-width: 600px;
+    line-height: 1.7;
+  }
+
+  .pub-year {
+    margin-bottom: 2.5rem;
+  }
+
+  .year-label {
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    margin-bottom: 1rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .pub-list {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 1.75rem;
+  }
+
+  .pub-item {
+    max-width: 720px;
+  }
+
+  .pub-title {
+    font-size: 0.95rem;
+    font-weight: 600;
+    margin-bottom: 0.2rem;
+  }
+
+  .pub-authors {
+    font-size: 0.85rem;
+    color: var(--text-muted);
+    margin-bottom: 0.15rem;
+  }
+
+  .pub-authors strong {
+    color: var(--text);
+    font-weight: 700;
+  }
+
+  .pub-venue {
+    font-size: 0.85rem;
+    color: var(--text-muted);
+    margin-bottom: 0.4rem;
+  }
+
+  .pub-links {
+    display: flex;
+    gap: 0.75rem;
+  }
+
+  .pub-links a {
+    font-size: 0.8rem;
+    color: var(--text);
+    text-decoration: none;
+    border-bottom: 1px solid var(--border);
+    padding-bottom: 1px;
+    transition: border-color 0.15s;
+  }
+
+  .pub-links a:hover {
+    border-color: var(--text);
+  }
+
+  .scholar-note {
+    font-size: 0.85rem;
+    color: var(--text-muted);
+    margin-top: 1rem;
+  }
+
+  .scholar-note a {
+    color: var(--text-muted);
+  }
+</style>

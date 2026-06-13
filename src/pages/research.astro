@@ -1,0 +1,90 @@
+---
+import Layout from "../layouts/Layout.astro";
+---
+
+<Layout title="Research" description="Research areas at the LEAP Lab">
+  <section class="page-header">
+    <h1>Research</h1>
+    <p class="subtitle">
+      LEAP Lab investigates the dual relationship between AI and energy —
+      how AI shapes energy demand, and how energy constraints shape AI.
+    </p>
+  </section>
+
+  <section class="research-areas">
+    <article class="area">
+      <h2>AI-Accelerated Transport Physics</h2>
+      <p>
+        We use artificial-intelligence-empowered first-principles calculations to
+        uncover how energy carriers — electrons, phonons, spins, and magnons —
+        generate and move heat inside computing devices, with the goal of
+        understanding and ultimately suppressing unwanted heat through new physics.
+      </p>
+    </article>
+
+    <article class="area">
+      <h2>Energy Materials by Design</h2>
+      <p>
+        We apply the principles of chemistry to design, synthesize, and
+        characterize molecular materials with tailored electronic and thermal
+        properties — helping close the gap between AI-driven materials prediction
+        and real-world synthesis and validation.
+      </p>
+    </article>
+
+    <article class="area">
+      <h2>Optical Spectroscopy Beyond the Diffraction Limit</h2>
+      <p>
+        We push optical spectroscopy techniques, including thermal-wave and
+        beam-offset methods, toward nanoscale imaging of transport in electronic
+        and energy materials — from characterizing wafers to evaluating operating
+        electronics.
+      </p>
+    </article>
+  </section>
+</Layout>
+
+<style>
+  .page-header {
+    padding-bottom: 2.5rem;
+    border-bottom: 1px solid var(--border);
+    margin-bottom: 2.5rem;
+  }
+
+  h1 {
+    font-size: 2.4rem;
+    font-weight: 800;
+    letter-spacing: -0.03em;
+    margin-bottom: 0.75rem;
+  }
+
+  .subtitle {
+    font-size: 1rem;
+    color: var(--text-muted);
+    max-width: 600px;
+    line-height: 1.7;
+  }
+
+  .research-areas {
+    display: flex;
+    flex-direction: column;
+    gap: 2.5rem;
+  }
+
+  .area {
+    max-width: 680px;
+  }
+
+  .area h2 {
+    font-size: 1.15rem;
+    font-weight: 700;
+    margin-bottom: 0.6rem;
+  }
+
+  .area p {
+    font-size: 0.95rem;
+    color: var(--text-muted);
+    line-height: 1.7;
+    margin-bottom: 0.4rem;
+  }
+</style>

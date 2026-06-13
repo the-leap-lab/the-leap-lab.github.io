@@ -1,0 +1,137 @@
+---
+import Layout from "../layouts/Layout.astro";
+---
+
+<Layout title="Contact" description="Contact the LEAP Lab at Rutgers University">
+  <section class="page-header">
+    <h1>Contact</h1>
+    <p class="subtitle">
+      We welcome inquiries from prospective students, collaborators, and industry partners.
+    </p>
+  </section>
+
+  <div class="contact-grid">
+    <section class="contact-block">
+      <h2>Principal Investigator</h2>
+      <p><strong>Qichen Song</strong><br />Assistant Professor</p>
+      <p>
+        Department of Mechanical and Aerospace Engineering<br />
+        Rutgers, The State University of New Jersey
+      </p>
+      <p>
+        <a href="mailto:qichen.song@rutgers.edu">qichen.song@rutgers.edu</a>
+      </p>
+    </section>
+
+    <section class="contact-block">
+      <h2>Location</h2>
+      <p class="placeholder-note">[Office number coming soon]</p>
+      <p>
+        Engineering Building<br />
+        98 Brett Road<br />
+        Piscataway, NJ 08854
+      </p>
+    </section>
+
+    <section class="contact-block joining">
+      <h2>Joining the Lab</h2>
+      <p>
+        <strong>Prospective PhD students:</strong> If you are interested in joining
+        LEAP Lab, please email with your CV and a brief description of your research
+        interests. Our group works across both theory/computation and experiment, and
+        students are welcome to engage with both sides of our research. We
+        are actively recruiting for Fall 2026.
+      </p>
+      <p>
+        <strong>Postdocs:</strong> We may have openings depending on funding.
+        Please reach out with your CV and research statement.
+      </p>
+      <p>
+        <strong>Undergraduates at Rutgers:</strong> We welcome motivated undergrads
+        for research projects. Email to inquire.
+      </p>
+    </section>
+  </div>
+</Layout>
+
+<style>
+  .page-header {
+    padding-bottom: 2.5rem;
+    border-bottom: 1px solid var(--border);
+    margin-bottom: 2.5rem;
+  }
+
+  h1 {
+    font-size: 2.4rem;
+    font-weight: 800;
+    letter-spacing: -0.03em;
+    margin-bottom: 0.75rem;
+  }
+
+  .subtitle {
+    font-size: 1rem;
+    color: var(--text-muted);
+    max-width: 600px;
+    line-height: 1.7;
+  }
+
+  .contact-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2.5rem 3rem;
+  }
+
+  .joining {
+    grid-column: 1 / -1;
+    max-width: 680px;
+  }
+
+  .contact-block h2 {
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    margin-bottom: 1rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .contact-block p {
+    font-size: 0.9rem;
+    color: var(--text-muted);
+    line-height: 1.7;
+    margin-bottom: 0.6rem;
+  }
+
+  .contact-block strong {
+    color: var(--text);
+  }
+
+  .contact-block a {
+    color: var(--text);
+    text-decoration: none;
+    border-bottom: 1px solid var(--border);
+    padding-bottom: 1px;
+    transition: border-color 0.15s;
+  }
+
+  .contact-block a:hover {
+    border-color: var(--text);
+  }
+
+  .placeholder-note {
+    color: #bbb !important;
+    font-style: italic;
+  }
+
+  @media (max-width: 600px) {
+    .contact-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .joining {
+      grid-column: 1;
+    }
+  }
+</style>

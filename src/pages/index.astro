@@ -1,17 +1,121 @@
 ---
-
+import Layout from "../layouts/Layout.astro";
 ---
 
-<html lang="en">
-	<head>
-		<meta charset="utf-8" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<link rel="icon" href="/favicon.ico" />
-		<meta name="viewport" content="width=device-width" />
-		<meta name="generator" content={Astro.generator} />
-		<title>Astro</title>
-	</head>
-	<body>
-		<h1>Astro</h1>
-	</body>
-</html>
+<Layout title="Home">
+  <section class="hero">
+    <p class="eyebrow">Rutgers University · Mechanical & Aerospace Engineering</p>
+    <h1>Lab for the<br /><span>Energy-AI Paradox</span></h1>
+    <p class="tagline">
+      We study the intersection of artificial intelligence and energy systems —
+      combining theory and experiment to understand, predict, and resolve the
+      tensions between AI's growing energy demands and a sustainable future.
+    </p>
+    <div class="hero-links">
+      <a href="/research" class="btn-primary">Our Research</a>
+      <a href="/people" class="btn-secondary">Meet the Team</a>
+    </div>
+  </section>
+
+  <section class="highlights">
+    <div class="highlight-card">
+      <h3>Transport Physics with AI</h3>
+      <p>Using AI-accelerated first-principles calculations to uncover how heat and charge move through computing devices — and how to control them.</p>
+    </div>
+    <div class="highlight-card">
+      <h3>Energy Materials by Design</h3>
+      <p>Applying chemistry to design and synthesize molecular materials with tailored electronic and thermal properties.</p>
+    </div>
+    <div class="highlight-card">
+      <h3>Optical Imaging at the Nanoscale</h3>
+      <p>Pushing optical spectroscopy beyond the diffraction limit to image energy transport in real materials and devices.</p>
+    </div>
+  </section>
+</Layout>
+
+<style>
+  .eyebrow {
+    font-size: 0.85rem;
+    letter-spacing: 0.05em;
+    color: var(--text-muted);
+    margin-bottom: 1rem;
+    text-transform: uppercase;
+  }
+
+  .hero {
+    padding: 4rem 0 5rem;
+    max-width: 720px;
+  }
+
+  h1 {
+    font-size: clamp(2rem, 5vw, 3.2rem);
+    font-weight: 800;
+    line-height: 1.15;
+    letter-spacing: -0.03em;
+    margin-bottom: 1.5rem;
+  }
+
+  h1 span {
+    color: var(--accent);
+  }
+
+  .tagline {
+    font-size: 1.1rem;
+    color: var(--text-muted);
+    max-width: 580px;
+    margin-bottom: 2.5rem;
+    line-height: 1.7;
+  }
+
+  .hero-links {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+  }
+
+  .btn-primary,
+  .btn-secondary {
+    display: inline-block;
+    padding: 0.6rem 1.4rem;
+    border-radius: 4px;
+    font-size: 0.9rem;
+    font-weight: 600;
+    text-decoration: none;
+    transition: opacity 0.15s;
+  }
+
+  .btn-primary {
+    background: var(--text);
+    color: var(--bg);
+  }
+
+  .btn-secondary {
+    border: 1px solid var(--border);
+    color: var(--text);
+  }
+
+  .btn-primary:hover,
+  .btn-secondary:hover {
+    opacity: 0.75;
+  }
+
+  .highlights {
+    border-top: 1px solid var(--border);
+    padding-top: 3rem;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 2rem;
+  }
+
+  .highlight-card h3 {
+    font-size: 1rem;
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+  }
+
+  .highlight-card p {
+    font-size: 0.9rem;
+    color: var(--text-muted);
+    line-height: 1.6;
+  }
+</style>
