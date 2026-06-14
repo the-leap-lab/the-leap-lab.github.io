@@ -25,11 +25,11 @@ import Layout from "../layouts/Layout.astro";
         <p class="bio">
           I am an Assistant Professor in the Department of Mechanical and
           Aerospace Engineering at Rutgers University since September 2026.
-          Previously, I was a Harvard Quantum Initiative Postdoctoral Fellow at
-          Harvard University, hosted by Prof. Jarad A. Mason in the Department
+          Previously, I was a <a href="https://quantum.harvard.edu/hqi-prize-postdoctoral-fellows">Harvard Quantum Initiative Postdoctoral Fellow</a> at
+          Harvard University, hosted by <a href="https://www.mason.chemistry.harvard.edu/">Prof. Jarad A. Mason</a> in the Department
           of Chemistry and Chemical Biology, and worked closely with Prof. Julia
-          A. Mundy in the Department of Physics. In 2022, I obtained my
-          Ph.D. in Mechanical Engineering from MIT, advised by Prof. Gang Chen.
+          <a href="http://mundy.physics.harvard.edu/">A. Mundy</a> in the Department of Physics. In 2022, I obtained my
+          Ph.D. in Mechanical Engineering from MIT, advised by <a href="https://web.mit.edu/nanoengineering/">Prof. Gang Chen</a>.
         </p>
         <p class="bio">
           I am interested in understanding, manipulating, and optimizing the
@@ -40,7 +40,7 @@ import Layout from "../layouts/Layout.astro";
         </p>
         <div class="person-links">
           <a href="mailto:qichen.song@rutgers.edu">qichen.song@rutgers.edu</a>
-          <!-- <a href="">CV</a> -->
+          <a href="/CV_Qichen_Song.pdf">CV</a>
           <!-- <a href="">Google Scholar</a> -->
         </div>
       </div>
@@ -88,7 +88,7 @@ import Layout from "../layouts/Layout.astro";
     font-weight: 700;
     letter-spacing: 0.1em;
     text-transform: uppercase;
-    color: var(--text-muted);
+    color: var(--accent);
     margin-bottom: 1.5rem;
     padding-bottom: 0.5rem;
     border-bottom: 1px solid var(--border);
@@ -106,18 +106,20 @@ import Layout from "../layouts/Layout.astro";
     border-radius: 4px;
     object-fit: cover;
     flex-shrink: 0;
+    margin-top: 0.3rem;
   }
 
   .person-info h3 {
     font-size: 1.2rem;
     font-weight: 700;
+    line-height: 1;
     margin-bottom: 0.25rem;
   }
 
   .role {
     font-size: 0.9rem;
     font-weight: 600;
-    color: var(--accent);
+    color: var(--text);
     margin-bottom: 0.25rem;
   }
 
@@ -145,6 +147,17 @@ import Layout from "../layouts/Layout.astro";
     line-height: 1.7;
     max-width: 520px;
     margin-bottom: 0.75rem;
+  }
+
+  .bio a {
+    color: var(--text-muted);
+    text-decoration: underline;
+    text-decoration-color: var(--border);
+    transition: color 0.15s;
+  }
+
+  .bio a:hover {
+    color: var(--text);
   }
 
   .person-links {
