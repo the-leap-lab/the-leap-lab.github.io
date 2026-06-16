@@ -12,6 +12,10 @@ interface Props {
 
 const { title, description = "LEAP Lab — Lab for the Energy-AI Paradox at Rutgers University" } = Astro.props;
 
+const siteUrl = "https://the-leap-lab.github.io";
+const pageUrl = `${siteUrl}${Astro.url.pathname}`;
+const ogImage = `${siteUrl}/images/og.png`;
+
 const navLinks = [
   { href: "/research", label: "Research" },
   { href: "/people", label: "People" },
@@ -30,6 +34,13 @@ const currentPath = Astro.url.pathname;
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="generator" content={Astro.generator} />
     <meta name="description" content={description} />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content={pageUrl} />
+    <meta property="og:title" content={`${title} | LEAP Lab`} />
+    <meta property="og:description" content={description} />
+    <meta property="og:image" content={ogImage} />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:image" content={ogImage} />
     <title>{title} | LEAP Lab</title>
     <style>
       *, *::before, *::after {
