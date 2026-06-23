@@ -136,7 +136,7 @@ import Layout from "../layouts/Layout.astro";
   }
 
   .affil a:hover {
-    color: var(--text);
+    color: var(--accent);
   }
 
   .bio {
@@ -155,7 +155,7 @@ import Layout from "../layouts/Layout.astro";
   }
 
   .bio a:hover {
-    color: var(--text);
+    color: var(--accent);
   }
 
   .person-links {
@@ -169,11 +169,12 @@ import Layout from "../layouts/Layout.astro";
     text-decoration: none;
     border-bottom: 1px solid var(--border);
     padding-bottom: 1px;
-    transition: border-color 0.15s;
+    transition: color 0.15s, border-color 0.15s;
   }
 
   .person-links a:hover {
-    border-color: var(--text);
+    color: var(--accent);
+    border-color: var(--accent);
   }
 
   .placeholder-note {
@@ -183,6 +184,11 @@ import Layout from "../layouts/Layout.astro";
 
   .placeholder-note a {
     color: var(--text-muted);
+    transition: color 0.15s;
+  }
+
+  .placeholder-note a:hover {
+    color: var(--accent);
   }
 
   @media (max-width: 480px) {

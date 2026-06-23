@@ -38,7 +38,7 @@ import Layout from "../layouts/Layout.astro";
       <p>
         <strong>Prospective PhD students:</strong> If you are interested in joining
         LEAP Lab, please email with your CV and a brief description of your research
-        interests. Our group works across both theory/computation and experiment, and
+        interests. Our group works across both theory and experiment, and
         students are welcome to engage with both sides of our research. We
         are actively recruiting for Fall 2026 and Fall 2027.
       </p>
@@ -111,11 +111,12 @@ import Layout from "../layouts/Layout.astro";
     text-decoration: none;
     border-bottom: 1px solid var(--border);
     padding-bottom: 1px;
-    transition: border-color 0.15s;
+    transition: color 0.15s, border-color 0.15s;
   }
 
   .contact-block a:hover {
-    border-color: var(--text);
+    color: var(--accent);
+    border-color: var(--accent);
   }
 
   .placeholder-note {

@@ -356,11 +356,12 @@ const pubs = [
     text-decoration: none;
     border-bottom: 1px solid var(--border);
     padding-bottom: 1px;
-    transition: border-color 0.15s;
+    transition: color 0.15s, border-color 0.15s;
   }
 
   .pub-links a:hover {
-    border-color: var(--text);
+    color: var(--accent);
+    border-color: var(--accent);
   }
 
   .scholar-note {
@@ -371,5 +372,10 @@ const pubs = [
 
   .scholar-note a {
     color: var(--text-muted);
+    transition: color 0.15s;
+  }
+
+  .scholar-note a:hover {
+    color: var(--accent);
   }
 </style>

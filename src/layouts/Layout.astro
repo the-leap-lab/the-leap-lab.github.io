@@ -1,10 +1,4 @@
 ---
-import "@fontsource/inter/400.css";
-import "@fontsource/inter/500.css";
-import "@fontsource/inter/600.css";
-import "@fontsource/inter/700.css";
-import "@fontsource/inter/800.css";
-
 interface Props {
   title: string;
   description?: string;
@@ -32,6 +26,12 @@ const currentPath = Astro.url.pathname;
     <meta charset="utf-8" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+    <link rel="preconnect" href="https://api.fontshare.com" />
+    <link rel="preconnect" href="https://cdn.fontshare.com" crossorigin />
+    <link
+      href="https://api.fontshare.com/v2/css?f[]=general-sans@400,500,600,700&display=swap"
+      rel="stylesheet"
+    />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="generator" content={Astro.generator} />
     <meta name="description" content={description} />
@@ -50,16 +50,26 @@ const currentPath = Astro.url.pathname;
         padding: 0;
       }
 
+      ::selection {
+        background: var(--accent);
+        color: #ffffff;
+      }
+
+      ::-moz-selection {
+        background: var(--accent);
+        color: #ffffff;
+      }
+
       :root {
         --bg: #ffffff;
         --text: #111111;
-        --text-muted: #5b6770;
+        --text-muted: #4b5560;
         --accent: #cc0033;
         --border: #e6e8ea;
         --max-width: 960px;
         --nav-height: 60px;
-        font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
-        font-size: 16px;
+        font-family: "General Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+        font-size: 17px;
         line-height: 1.6;
         color: var(--text);
         background: var(--bg);
@@ -79,6 +89,14 @@ const currentPath = Astro.url.pathname;
         background: var(--bg);
         border-bottom: 1px solid var(--border);
         height: var(--nav-height);
+        transition: background 0.3s ease, box-shadow 0.3s ease;
+      }
+
+      header.scrolled {
+        background: rgba(255, 255, 255, 0.7);
+        box-shadow: 0 1px 12px rgba(0, 0, 0, 0.04);
+        backdrop-filter: blur(12px) saturate(180%);
+        -webkit-backdrop-filter: blur(12px) saturate(180%);
       }
 
       nav {
@@ -111,20 +129,34 @@ const currentPath = Astro.url.pathname;
       }
 
       .nav-links a {
-        color: var(--text-muted);
+        position: relative;
+        color: var(--text);
         text-decoration: none;
         font-size: 0.9rem;
         letter-spacing: 0.02em;
         transition: color 0.15s;
       }
 
-      .nav-links a:hover,
-      .nav-links a[aria-current="page"] {
-        color: var(--text);
+      .nav-links a::after {
+        content: "";
+        position: absolute;
+        left: 0;
+        bottom: -8px;
+        width: 100%;
+        height: 2px;
+        background: var(--accent);
+        transform: scaleX(0);
+        transform-origin: left;
+        transition: transform 0.25s ease;
       }
 
+      .nav-links a:hover,
       .nav-links a[aria-current="page"] {
-        font-weight: 600;
+        color: var(--accent);
+      }
+
+      .nav-links a:hover::after {
+        transform: scaleX(1);
       }
 
       /* NAV TOGGLE (mobile hamburger) */
@@ -182,10 +214,11 @@ const currentPath = Astro.url.pathname;
       footer a {
         color: var(--text-muted);
         text-decoration: none;
+        transition: color 0.15s;
       }
 
       footer a:hover {
-        color: var(--text);
+        color: var(--accent);
       }
 
       @media (max-width: 768px) {
@@ -253,6 +286,17 @@ const currentPath = Astro.url.pathname;
     </footer>
 
     <script>
+      const header = document.querySelector<HTMLElement>("header");
+
+      if (header) {
+        const updateScrolled = () => {
+          header.classList.toggle("scrolled", window.scrollY > 8);
+        };
+
+        updateScrolled();
+        window.addEventListener("scroll", updateScrolled, { passive: true });
+      }
+
       const toggle = document.querySelector<HTMLButtonElement>(".nav-toggle");
       const navLinks = document.querySelector<HTMLElement>(".nav-links");
 
