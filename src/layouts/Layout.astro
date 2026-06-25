@@ -158,6 +158,7 @@ const currentPath = Astro.url.pathname;
         transform: scaleX(0);
         transform-origin: left;
         transition: transform 0.25s ease;
+        will-change: transform;
       }
 
       .nav-links a:hover,
