@@ -246,7 +246,9 @@ const pubs = [
       <ol class="pub-list">
         {group.items.map((item) => (
           <li class="pub-item">
-            <p class="pub-title">{item.title}{item.cover && <span class="cover-badge">Cover</span>}</p>
+            <p class="pub-title">{item.title}{item.cover && (
+              <a class="cover-badge" href={item.coverImageLink || item.coverImage} target="_blank" rel="noopener">Cover</a>
+            )}</p>
             <p class="pub-authors" set:html={item.authors.join(", ")} />
             <p class="pub-venue" set:html={item.venue} />
             <div class="pub-links">
@@ -357,6 +359,7 @@ const pubs = [
     border: 1px solid var(--accent);
     border-radius: 999px;
     vertical-align: middle;
+    text-decoration: none;
   }
 
   .pub-authors {
