@@ -8,7 +8,10 @@ const pubs = [
       {
         title: "Reversible regulation of thermal conductivity through spin-crossover transitions",
         authors: ["<strong>Qichen Song</strong>", "Rahil Ukani", "Vidhya Dev", "Jungwoo Shin", "Jinyoung Seo", "Hong Ki Kim", "Caleb Stamper", "Ryan McGillicuddy", "Catherine Thai", "Dehong Yu", "Gang Chen", "Jarad A. Mason*"],
-        venue: "<em>J. Am. Chem. Soc.</em>, 2026",
+        venue: "<em>J. Am. Chem. Soc.</em>, 2026, 148 (30), 32186–32194",
+        cover: true,
+        coverImage: "/images/jacs-2026-cover.jpg",
+        coverImageLink: "https://pubs.acs.org/jacsat/issue/148/30",
         links: [{ label: "DOI", url: "https://pubs.acs.org/doi/10.1021/jacs.6c07632" }],
       },
       {
@@ -243,7 +246,7 @@ const pubs = [
       <ol class="pub-list">
         {group.items.map((item) => (
           <li class="pub-item">
-            <p class="pub-title">{item.title}</p>
+            <p class="pub-title">{item.title}{item.cover && <span class="cover-badge">Cover</span>}</p>
             <p class="pub-authors" set:html={item.authors.join(", ")} />
             <p class="pub-venue" set:html={item.venue} />
             <div class="pub-links">
@@ -251,6 +254,11 @@ const pubs = [
                 <a href={link.url} target="_blank" rel="noopener">{link.label}</a>
               ))}
             </div>
+            {item.coverImage && (
+              <a href={item.coverImageLink || item.coverImage} target="_blank" rel="noopener">
+                <img class="pub-cover-image" src={item.coverImage} alt={`Journal cover for "${item.title}"`} loading="lazy" />
+              </a>
+            )}
           </li>
         ))}
       </ol>
@@ -322,10 +330,33 @@ const pubs = [
     max-width: 720px;
   }
 
+  .pub-cover-image {
+    display: block;
+    width: 180px;
+    height: auto;
+    margin-top: 0.6rem;
+    border-radius: 4px;
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.2);
+  }
+
   .pub-title {
     font-size: 0.95rem;
     font-weight: 600;
     margin-bottom: 0.2rem;
+  }
+
+  .cover-badge {
+    display: inline-block;
+    margin-left: 0.5rem;
+    padding: 0.1rem 0.5rem;
+    font-size: 0.7rem;
+    font-weight: 700;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    color: var(--accent);
+    border: 1px solid var(--accent);
+    border-radius: 999px;
+    vertical-align: middle;
   }
 
   .pub-authors {
