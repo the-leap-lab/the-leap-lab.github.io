@@ -22,6 +22,7 @@ import Layout from "../layouts/Layout.astro";
         generate and move heat inside computing devices, with the goal of
         understanding and ultimately suppressing unwanted heat through new physics.
       </p>
+      <img class="area-image" src="/images/transport-physics.png" alt="Electron and phonon flow illustration" loading="lazy" />
     </article>
 
     <article class="area">
@@ -32,6 +33,7 @@ import Layout from "../layouts/Layout.astro";
         properties — helping close the gap between AI-driven materials prediction
         and real-world synthesis and validation.
       </p>
+      <img class="area-image" src="/images/energy-materials.png" alt="Ordered-to-disordered molecular caloric illustration" loading="lazy" />
     </article>
 
     <article class="area">
@@ -42,6 +44,7 @@ import Layout from "../layouts/Layout.astro";
         and energy materials — from characterizing wafers to evaluating operating
         electronics.
       </p>
+      <img class="area-image" src="/images/optical-imaging.png" alt="Pump-probe optical imaging of a semiconductor wafer" loading="lazy" />
     </article>
   </section>
 </Layout>
@@ -86,6 +89,15 @@ import Layout from "../layouts/Layout.astro";
 
   .area {
     max-width: 680px;
+  }
+
+  .area-image {
+    display: block;
+    width: 100%;
+    max-width: 350px;
+    height: auto;
+    margin-top: 1rem;
+    border-radius: 4px;
   }
 
   .area h2 {

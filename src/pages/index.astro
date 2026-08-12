@@ -24,14 +24,17 @@ import Layout from "../layouts/Layout.astro";
     <div class="highlight-card">
       <h3>Transport Physics with AI</h3>
       <p>Using AI-accelerated first-principles calculations to uncover how heat and charge move through computing devices — and how to control them.</p>
+      <img class="highlight-image" src="/images/transport-physics.png" alt="Electron and phonon flow illustration" loading="lazy" />
     </div>
     <div class="highlight-card">
       <h3>Energy Materials by Design</h3>
       <p>Applying chemistry to design and synthesize molecular materials with tailored electronic and thermal properties.</p>
+      <img class="highlight-image" src="/images/energy-materials.png" alt="Ordered-to-disordered molecular caloric illustration" loading="lazy" />
     </div>
     <div class="highlight-card">
       <h3>Optical Imaging at the Nanoscale</h3>
       <p>Pushing optical spectroscopy beyond the diffraction limit to image energy transport in real materials and devices.</p>
+      <img class="highlight-image" src="/images/optical-imaging.png" alt="Pump-probe optical imaging of a semiconductor wafer" loading="lazy" />
     </div>
   </section>
 </Layout>
@@ -110,6 +113,19 @@ import Layout from "../layouts/Layout.astro";
     gap: 2rem;
   }
 
+  .highlight-card {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .highlight-image {
+    display: block;
+    width: 100%;
+    height: auto;
+    margin-top: 1.25rem;
+    border-radius: 4px;
+  }
+
   .highlight-card h3 {
     font-size: 1rem;
     font-weight: 700;
@@ -120,5 +136,6 @@ import Layout from "../layouts/Layout.astro";
     font-size: 0.9rem;
     color: var(--text-muted);
     line-height: 1.6;
+    flex: 1;
   }
 </style>
