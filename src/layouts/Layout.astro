@@ -90,6 +90,8 @@ const currentPath = Astro.url.pathname;
         border-bottom: 1px solid var(--border);
         height: var(--nav-height);
         transition: background 0.3s ease, box-shadow 0.3s ease;
+        transform: translateZ(0);
+        will-change: transform;
       }
 
       header.scrolled {
