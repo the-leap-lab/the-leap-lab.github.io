@@ -24,17 +24,23 @@ import Layout from "../layouts/Layout.astro";
     <div class="highlight-card">
       <h3>Transport Physics with AI</h3>
       <p>Using AI-accelerated first-principles calculations to uncover how heat and charge move through computing devices — and how to control them.</p>
-      <img class="highlight-image" src="/images/transport-physics.png" alt="Electron and phonon flow illustration" loading="lazy" />
+      <div class="highlight-image-frame">
+        <img class="highlight-image crop-transport" src="/images/transport-physics.png" alt="Electron and phonon flow illustration" loading="lazy" />
+      </div>
     </div>
     <div class="highlight-card">
       <h3>Energy Materials by Design</h3>
       <p>Applying chemistry to design and synthesize molecular materials with tailored electronic and thermal properties.</p>
-      <img class="highlight-image" src="/images/energy-materials.png" alt="Ordered-to-disordered molecular caloric illustration" loading="lazy" />
+      <div class="highlight-image-frame">
+        <img class="highlight-image crop-materials" src="/images/energy-materials.png" alt="Ordered-to-disordered molecular caloric illustration" loading="lazy" />
+      </div>
     </div>
     <div class="highlight-card">
       <h3>Optical Imaging at the Nanoscale</h3>
       <p>Pushing optical spectroscopy beyond the diffraction limit to image energy transport in real materials and devices.</p>
-      <img class="highlight-image" src="/images/optical-imaging.png" alt="Pump-probe optical imaging of a semiconductor wafer" loading="lazy" />
+      <div class="highlight-image-frame">
+        <img class="highlight-image" src="/images/optical-imaging.png" alt="Pump-probe optical imaging of a semiconductor wafer" loading="lazy" />
+      </div>
     </div>
   </section>
 </Layout>
@@ -118,12 +124,30 @@ import Layout from "../layouts/Layout.astro";
     flex-direction: column;
   }
 
+  .highlight-image-frame {
+    overflow: hidden;
+    width: 100%;
+    margin-top: 1.25rem;
+    border-radius: 4px;
+  }
+
   .highlight-image {
     display: block;
     width: 100%;
     height: auto;
-    margin-top: 1.25rem;
-    border-radius: 4px;
+  }
+
+  /* Source images have uneven built-in whitespace on the left edge;
+     nudge the drawing left so it lines up with the text above/below
+     without altering the source files. */
+  .highlight-image.crop-transport {
+    width: 100.36%;
+    margin-left: -0.36%;
+  }
+
+  .highlight-image.crop-materials {
+    width: 102.13%;
+    margin-left: -2.13%;
   }
 
   .highlight-card h3 {
