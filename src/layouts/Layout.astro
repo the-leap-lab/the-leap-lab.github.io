@@ -90,19 +90,43 @@ const currentPath = Astro.url.pathname;
         position: sticky;
         top: 0;
         z-index: 10;
-        background: var(--bg);
-        border-bottom: 1px solid var(--border);
         height: var(--nav-height);
-        transition: background 0.3s ease, box-shadow 0.3s ease;
         transform: translateZ(0);
         will-change: transform;
       }
 
-      header.scrolled {
-        background: rgba(255, 255, 255, 0.55);
-        box-shadow: 0 1px 12px rgba(0, 0, 0, 0.04);
-        backdrop-filter: blur(16px) saturate(180%);
-        -webkit-backdrop-filter: blur(16px) saturate(180%);
+      /* Glass layer: translucent, blurred and brightened backdrop with a
+         light rim along the bottom edge (bright highlight over a faint
+         dark hairline) instead of a divider line. Once scrolled it gets
+         more see-through and lifts off the content with a soft shadow. */
+      header::before {
+        /* Apple-style glass, always on: a white sheen fading down over a
+           light tint, heavy blur and saturation so whatever passes
+           underneath turns into soft colour, and a crisp bright rim. */
+        content: "";
+        position: absolute;
+        inset: 0;
+        z-index: -1;
+        background:
+          linear-gradient(to bottom, rgba(255, 255, 255, 0.55), rgba(255, 255, 255, 0) 60%),
+          rgba(246, 247, 249, 0.5);
+        backdrop-filter: blur(30px) saturate(200%) brightness(1.05);
+        -webkit-backdrop-filter: blur(30px) saturate(200%) brightness(1.05);
+        box-shadow:
+          inset 0 1px 0 rgba(255, 255, 255, 0.95),
+          inset 0 -1px 0 rgba(255, 255, 255, 0.8),
+          0 1px 0 rgba(0, 0, 0, 0.07),
+          0 10px 30px -12px rgba(0, 0, 0, 0);
+        transition: box-shadow 0.3s ease;
+        pointer-events: none;
+      }
+
+      header.scrolled::before {
+        box-shadow:
+          inset 0 1px 0 rgba(255, 255, 255, 0.95),
+          inset 0 -1px 0 rgba(255, 255, 255, 0.8),
+          0 1px 0 rgba(0, 0, 0, 0.07),
+          0 10px 30px -12px rgba(0, 0, 0, 0.16);
       }
 
       nav {
@@ -216,7 +240,7 @@ const currentPath = Astro.url.pathname;
         max-width: var(--max-width);
         width: 100%;
         margin: 0 auto;
-        padding: 1rem 1.5rem 3rem;
+        padding: 0.5rem 1.5rem 3rem;
       }
 
       /* FOOTER */
@@ -335,6 +359,64 @@ const currentPath = Astro.url.pathname;
           });
         });
       }
+
+    // Elastic page overscroll: scrolling past the top or bottom with a
+    // mouse wheel / trackpad drags the content a little and it springs
+    // back. Touch devices keep their native overscroll.
+    const pageParts = ["main", "footer"]
+      .map((sel) => document.querySelector<HTMLElement>(sel))
+      .filter((el): el is HTMLElement => !!el);
+
+    if (pageParts.length) {
+      const LIMIT = 140;
+      let pull = 0;
+      let releaseTimer: number | undefined;
+
+      const rubber = (x: number) =>
+        Math.sign(x) * LIMIT * (1 - 1 / ((Math.abs(x) * 0.55) / LIMIT + 1));
+
+      const render = (animate: boolean) => {
+        // Offset with `top` rather than `transform`: a transform puts the
+        // content on its own compositing layer, which the header's
+        // backdrop blur can fail to pick up (the glass goes flat).
+        for (const el of pageParts) {
+          el.style.position = "relative";
+          el.style.transition = animate
+            ? "top 0.5s cubic-bezier(0.2, 0.9, 0.3, 1.12)"
+            : "none";
+          el.style.top = pull ? `${rubber(pull)}px` : "";
+        }
+      };
+
+      window.addEventListener(
+        "wheel",
+        (e) => {
+          // Inner scrollers (e.g. home-page News) handle their own
+          // overscroll; pinch-zoom arrives as ctrl+wheel.
+          if (e.defaultPrevented || e.ctrlKey) return;
+          if ((e.target as Element | null)?.closest?.(".news-scroll")) return;
+
+          const root = document.documentElement;
+          const down = e.deltaY > 0;
+          const atTop = window.scrollY <= 0;
+          const atBottom = window.scrollY + window.innerHeight >= root.scrollHeight - 1;
+          if (!pull && !(down ? atBottom : atTop)) return;
+
+          e.preventDefault();
+          const before = pull;
+          pull -= e.deltaY;
+          if ((before > 0 && pull < 0) || (before < 0 && pull > 0)) pull = 0;
+          render(false);
+
+          clearTimeout(releaseTimer);
+          releaseTimer = window.setTimeout(() => {
+            pull = 0;
+            render(true);
+          }, 90);
+        },
+        { passive: false }
+      );
+    }
     </script>
   </body>
 </html>

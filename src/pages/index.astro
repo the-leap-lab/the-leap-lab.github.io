@@ -1,24 +1,80 @@
 ---
 import Layout from "../layouts/Layout.astro";
+
+const news = [
+  {
+    date: "Sep 2026",
+    text: 'LEAP Lab opens in the <a href="https://mae.rutgers.edu/">Department of Mechanical and Aerospace Engineering</a> at Rutgers.<span class="news-para">We are recruiting graduate students. <a class="news-join" href="/contact">Join Us</a>.</span>',
+  },
+  {
+    date: "Aug 2026",
+    text: 'Our work on <a href="https://pubs.acs.org/doi/10.1021/jacs.6c07632">switching thermal conductivity with spin-crossover transitions</a> is featured on the cover of <em>JACS</em>.',
+    image: "/images/jacs-2026-cover.jpg",
+    imageLink: "https://pubs.acs.org/jacsat/issue/148/30",
+    imageAlt: "JACS cover, volume 148, issue 30",
+  },
+  {
+    date: "Mar 2026",
+    text: '<a href="https://pubs.acs.org/doi/abs/10.1021/acs.nanolett.5c04522">Microscopic domain effects in the metal-insulator transition of NdNiO₃</a> published in <em>Nano Letters</em>.',
+    image: "/images/nano-letter-toc.png",
+    imageLink: "https://pubs.acs.org/doi/abs/10.1021/acs.nanolett.5c04522",
+    imageAlt: "TOC graphic for the Nano Letters paper on NdNiO₃",
+    imageWide: true,
+  },
+];
 ---
 
 <Layout title="Home">
+  <div class="top">
   <section class="hero">
-    <p class="eyebrow">Rutgers University · Mechanical & Aerospace Engineering</p>
     <h1>Lab for the<br /><span>Energy-AI Paradox</span></h1>
     <p class="tagline">
       AI holds exceptional promise to advance productivity across society — yet
       today's AI scaling laws demand exponentially growing energy, long before
       the technology can deliver solutions to the energy challenges it creates.
-      We study the intersection of artificial intelligence and energy systems —
+      We study the interface between artificial intelligence and energy systems —
       combining theory and experiment to understand, predict, and resolve the
       tensions between AI's growing energy demands and a sustainable future.
     </p>
     <div class="hero-links">
       <a href="/research" class="btn-primary">Our Research</a>
-      <a href="/people" class="btn-secondary">Meet the Team</a>
+      <a href="/contact" class="btn-secondary">Join Us</a>
     </div>
   </section>
+
+  <aside class="news" aria-labelledby="news-title">
+    <h2 id="news-title">News</h2>
+    <div class="news-viewport">
+    <div class="news-scroll" tabindex="0">
+    <ul class="news-list">
+      {news.map((item) => (
+        <li>
+          <time>{item.date}</time>
+          <div class="news-body">
+            <p set:html={item.text} />
+            {item.image && (
+              <a class:list={["news-thumb", { wide: item.imageWide }]} href={item.imageLink} target="_blank" rel="noopener">
+                <img src={item.image} alt={item.imageAlt} loading="lazy" />
+              </a>
+            )}
+          </div>
+        </li>
+      ))}
+    </ul>
+    </div>
+    <button class="news-more up" type="button" aria-label="Scroll news up">
+      <svg viewBox="0 0 16 16" width="16" height="16" aria-hidden="true">
+        <path d="M3.5 10l4.5-4.5L12.5 10" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" />
+      </svg>
+    </button>
+    <button class="news-more down" type="button" aria-label="Scroll news down">
+      <svg viewBox="0 0 16 16" width="16" height="16" aria-hidden="true">
+        <path d="M3.5 6l4.5 4.5L12.5 6" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" />
+      </svg>
+    </button>
+    </div>
+  </aside>
+  </div>
 
   <section class="highlights">
     <div class="highlight-card">
@@ -45,18 +101,315 @@ import Layout from "../layouts/Layout.astro";
   </section>
 </Layout>
 
+<script>
+  // Elastic overscroll for the News list: pulling past either end
+  // stretches the list with resistance, then it springs back.
+  const scroller = document.querySelector<HTMLElement>(".news-scroll");
+  const list = scroller?.querySelector<HTMLElement>(".news-list");
+
+  if (scroller && list) {
+    const LIMIT = 120;
+    let pull = 0;
+    let releaseTimer: number | undefined;
+
+    const atTop = () => scroller.scrollTop <= 0;
+    const atBottom = () =>
+      scroller.scrollTop + scroller.clientHeight >= scroller.scrollHeight - 1;
+
+    // iOS-style rubber band: displacement grows ever more slowly.
+    const rubber = (x: number) =>
+      Math.sign(x) * LIMIT * (1 - 1 / ((Math.abs(x) * 0.55) / LIMIT + 1));
+
+    const render = (animate: boolean) => {
+      list.style.transition = animate
+        ? "transform 0.45s cubic-bezier(0.2, 0.9, 0.3, 1.15)"
+        : "none";
+      list.style.transform = pull ? `translateY(${rubber(pull)}px)` : "";
+    };
+
+    const release = () => {
+      pull = 0;
+      render(true);
+    };
+
+    const updateFades = () => {
+      scroller.classList.toggle("scrolled", !atTop());
+      scroller.classList.toggle("at-end", atBottom());
+    };
+
+    scroller.addEventListener("scroll", updateFades, { passive: true });
+    // Images load after first paint and change the list height.
+    new ResizeObserver(updateFades).observe(list);
+    new ResizeObserver(updateFades).observe(scroller);
+    updateFades();
+
+    scroller.addEventListener(
+      "wheel",
+      (e) => {
+        const down = e.deltaY > 0;
+        const pastEdge = (down && atBottom()) || (!down && atTop()) || pull !== 0;
+        if (!pastEdge) return;
+
+        e.preventDefault();
+        pull -= e.deltaY;
+        // Don't let the pull cross back over zero into the other side.
+        if ((down && pull > 0) || (!down && pull < 0)) pull = 0;
+        render(false);
+
+        clearTimeout(releaseTimer);
+        releaseTimer = window.setTimeout(release, 90);
+      },
+      { passive: false }
+    );
+
+    let lastY = 0;
+
+    scroller.addEventListener(
+      "touchstart",
+      (e) => {
+        lastY = e.touches[0].clientY;
+        clearTimeout(releaseTimer);
+      },
+      { passive: true }
+    );
+
+    scroller.addEventListener(
+      "touchmove",
+      (e) => {
+        const y = e.touches[0].clientY;
+        const dy = y - lastY;
+        lastY = y;
+
+        const pullingDown = dy > 0 && atTop();
+        const pullingUp = dy < 0 && atBottom();
+        if (!pull && !pullingDown && !pullingUp) return;
+
+        e.preventDefault();
+        const before = pull;
+        pull += dy;
+        if ((before > 0 && pull < 0) || (before < 0 && pull > 0)) pull = 0;
+        render(false);
+      },
+      { passive: false }
+    );
+
+    const step = () => scroller.clientHeight * 0.6;
+    scroller.parentElement
+      ?.querySelector(".news-more.down")
+      ?.addEventListener("click", () => {
+        scroller.scrollBy({ top: step(), behavior: "smooth" });
+      });
+    scroller.parentElement
+      ?.querySelector(".news-more.up")
+      ?.addEventListener("click", () => {
+        scroller.scrollBy({ top: -step(), behavior: "smooth" });
+      });
+
+    scroller.addEventListener("touchend", release);
+    scroller.addEventListener("touchcancel", release);
+  }
+</script>
+
 <style>
-  .eyebrow {
-    font-size: 0.85rem;
-    letter-spacing: 0.05em;
-    color: var(--text-muted);
-    margin-bottom: 1rem;
-    text-transform: uppercase;
+  .top {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) 280px;
+    gap: 3rem;
+    align-items: stretch;
+    padding-bottom: 3rem;
   }
 
   .hero {
-    padding: 1.5rem 0 3rem;
-    max-width: 720px;
+    margin-top: -0.25rem;
+  }
+
+  .news {
+    display: flex;
+    flex-direction: column;
+    border-left: 1px solid var(--border);
+    padding-left: 2rem;
+    /* Line up the News heading with the top of the h1 on the left. */
+    margin-top: 28px;
+  }
+
+  /* The list is taken out of flow so the column height follows the
+     hero on the left; the list then scrolls inside that height. */
+  .news-viewport {
+    position: relative;
+    flex: 1;
+    min-height: 0;
+  }
+
+  .news-scroll {
+    position: absolute;
+    inset: 0;
+    overflow-y: auto;
+    overscroll-behavior: contain;
+    scrollbar-width: none;
+    outline: none;
+    --fade-top: 0px;
+    --fade-bottom: 20px;
+    -webkit-mask-image: linear-gradient(to bottom, transparent, #000 var(--fade-top), #000 calc(100% - var(--fade-bottom)), transparent);
+    mask-image: linear-gradient(to bottom, transparent, #000 var(--fade-top), #000 calc(100% - var(--fade-bottom)), transparent);
+  }
+
+  .news-scroll::-webkit-scrollbar {
+    display: none;
+  }
+
+  .news-scroll.scrolled {
+    --fade-top: 10px;
+  }
+
+  .news-scroll.at-end {
+    --fade-bottom: 0px;
+  }
+
+  .news-more {
+    position: absolute;
+    left: 50%;
+    bottom: -18px;
+    translate: -50% 0;
+    display: grid;
+    place-items: center;
+    width: 28px;
+    height: 28px;
+    padding: 0;
+    border: none;
+    background: none;
+    color: var(--text-muted);
+    cursor: pointer;
+    animation: news-bob 1.8s ease-in-out infinite;
+    transition: opacity 0.25s ease, color 0.15s;
+  }
+
+  .news-more:hover {
+    color: var(--accent);
+  }
+
+  .news-more.up {
+    bottom: auto;
+    top: -6px;
+    animation-name: news-bob-up;
+  }
+
+  .news-scroll.at-end ~ .news-more.down,
+  .news-scroll:not(.scrolled) ~ .news-more.up {
+    opacity: 0;
+    pointer-events: none;
+  }
+
+  @keyframes news-bob-up {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-3px); }
+  }
+
+  @keyframes news-bob {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(3px); }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .news-more {
+      animation: none;
+    }
+  }
+
+  .news-list {
+    padding-bottom: 0.5rem !important;
+    will-change: transform;
+  }
+
+  .news h2 {
+    margin-top: 0;
+    font-size: 1.2rem;
+    font-weight: 700;
+    margin-bottom: 0.55rem;
+  }
+
+  .news ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  .news li + li {
+    margin-top: 0.9rem;
+  }
+
+  .news time {
+    display: block;
+    font-size: 0.75rem;
+    font-weight: 600;
+    color: var(--accent);
+    margin-bottom: 0.15rem;
+  }
+
+  .news-thumb {
+    display: block;
+    width: 110px;
+    margin-top: 0.6rem;
+  }
+
+  .news-thumb.wide {
+    width: 180px;
+  }
+
+  .news-thumb img {
+    display: block;
+    width: 100%;
+    height: auto;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.12);
+    transition: transform 0.2s ease;
+  }
+
+  .news-thumb:hover img {
+    transform: translateY(-2px);
+  }
+
+  .news p {
+    margin: 0;
+    font-size: 0.85rem;
+    color: var(--text-muted);
+    line-height: 1.5;
+  }
+
+  .news :global(.news-para) {
+    display: block;
+    margin-top: 0.4rem;
+  }
+
+  .news :global(a) {
+    color: var(--text);
+    text-decoration: underline;
+    text-decoration-color: var(--border);
+    transition: color 0.15s;
+  }
+
+  .news :global(a:hover) {
+    color: var(--accent);
+  }
+
+  .news :global(a.news-join) {
+    font-weight: 600;
+  }
+
+  @media (max-width: 768px) {
+    .top {
+      grid-template-columns: 1fr;
+      gap: 2rem;
+    }
+
+    .news {
+      border-left: none;
+      padding-left: 0;
+      margin-top: 0;
+    }
+
+    .news-viewport {
+      flex: none;
+      height: 340px;
+    }
   }
 
   h1 {
@@ -102,8 +455,9 @@ import Layout from "../layouts/Layout.astro";
   }
 
   .btn-secondary {
-    border: 1px solid var(--border);
-    color: var(--text);
+    border: 1px solid var(--accent);
+    background: var(--accent);
+    color: #ffffff;
   }
 
   .btn-primary:hover,
