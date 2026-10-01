@@ -262,6 +262,17 @@ const currentPath = Astro.url.pathname;
         color: var(--accent);
       }
 
+      .footer-logo {
+        display: inline-block;
+        margin-top: 0.75rem;
+      }
+
+      .footer-logo img {
+        display: block;
+        height: 56px;
+        width: auto;
+      }
+
       @media (max-width: 768px) {
         .nav-toggle {
           display: flex;
@@ -327,6 +338,9 @@ const currentPath = Astro.url.pathname;
       <p>
         &copy; {new Date().getFullYear()} Lab for the Energy-AI Paradox, Rutgers University&ndash;New Brunswick
       </p>
+      <a class="footer-logo" href="https://www.rutgers.edu" target="_blank" rel="noopener">
+        <img src="/images/rutgers-logo.svg" alt="Rutgers, The State University of New Jersey" />
+      </a>
     </footer>
 
     <script>
