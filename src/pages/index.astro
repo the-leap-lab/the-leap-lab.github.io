@@ -102,35 +102,13 @@ const news = [
 </Layout>
 
 <script>
-  // Elastic overscroll for the News list: pulling past either end
-  // stretches the list with resistance, then it springs back.
   const scroller = document.querySelector<HTMLElement>(".news-scroll");
   const list = scroller?.querySelector<HTMLElement>(".news-list");
 
   if (scroller && list) {
-    const LIMIT = 120;
-    let pull = 0;
-    let releaseTimer: number | undefined;
-
     const atTop = () => scroller.scrollTop <= 0;
     const atBottom = () =>
       scroller.scrollTop + scroller.clientHeight >= scroller.scrollHeight - 1;
-
-    // iOS-style rubber band: displacement grows ever more slowly.
-    const rubber = (x: number) =>
-      Math.sign(x) * LIMIT * (1 - 1 / ((Math.abs(x) * 0.55) / LIMIT + 1));
-
-    const render = (animate: boolean) => {
-      list.style.transition = animate
-        ? "transform 0.45s cubic-bezier(0.2, 0.9, 0.3, 1.15)"
-        : "none";
-      list.style.transform = pull ? `translateY(${rubber(pull)}px)` : "";
-    };
-
-    const release = () => {
-      pull = 0;
-      render(true);
-    };
 
     const updateFades = () => {
       scroller.classList.toggle("scrolled", !atTop());
@@ -143,56 +121,6 @@ const news = [
     new ResizeObserver(updateFades).observe(scroller);
     updateFades();
 
-    scroller.addEventListener(
-      "wheel",
-      (e) => {
-        const down = e.deltaY > 0;
-        const pastEdge = (down && atBottom()) || (!down && atTop()) || pull !== 0;
-        if (!pastEdge) return;
-
-        e.preventDefault();
-        pull -= e.deltaY;
-        // Don't let the pull cross back over zero into the other side.
-        if ((down && pull > 0) || (!down && pull < 0)) pull = 0;
-        render(false);
-
-        clearTimeout(releaseTimer);
-        releaseTimer = window.setTimeout(release, 90);
-      },
-      { passive: false }
-    );
-
-    let lastY = 0;
-
-    scroller.addEventListener(
-      "touchstart",
-      (e) => {
-        lastY = e.touches[0].clientY;
-        clearTimeout(releaseTimer);
-      },
-      { passive: true }
-    );
-
-    scroller.addEventListener(
-      "touchmove",
-      (e) => {
-        const y = e.touches[0].clientY;
-        const dy = y - lastY;
-        lastY = y;
-
-        const pullingDown = dy > 0 && atTop();
-        const pullingUp = dy < 0 && atBottom();
-        if (!pull && !pullingDown && !pullingUp) return;
-
-        e.preventDefault();
-        const before = pull;
-        pull += dy;
-        if ((before > 0 && pull < 0) || (before < 0 && pull > 0)) pull = 0;
-        render(false);
-      },
-      { passive: false }
-    );
-
     const step = () => scroller.clientHeight * 0.6;
     scroller.parentElement
       ?.querySelector(".news-more.down")
@@ -204,9 +132,6 @@ const news = [
       ?.addEventListener("click", () => {
         scroller.scrollBy({ top: -step(), behavior: "smooth" });
       });
-
-    scroller.addEventListener("touchend", release);
-    scroller.addEventListener("touchcancel", release);
   }
 </script>
 
@@ -224,12 +149,39 @@ const news = [
   }
 
   .news {
+    position: relative;
     display: flex;
     flex-direction: column;
-    border-left: 1px solid var(--border);
     padding-left: 2rem;
     /* Line up the News heading with the top of the h1 on the left. */
     margin-top: 28px;
+    transition: padding 0.6s ease, margin 0.6s ease;
+  }
+
+  /* Divider lines drawn as pseudo-elements so crossing the mobile
+     breakpoint animates: the side line retracts upward while the top
+     line grows out from the same corner. */
+  .news::before,
+  .news::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    background: var(--border);
+    transform-origin: top left;
+    transition: transform 0.6s ease;
+    pointer-events: none;
+  }
+
+  .news::before {
+    bottom: 0;
+    width: 1px;
+  }
+
+  .news::after {
+    right: 0;
+    height: 1px;
+    transform: scaleX(0);
   }
 
   /* The list is taken out of flow so the column height follows the
@@ -312,6 +264,12 @@ const news = [
   @media (prefers-reduced-motion: reduce) {
     .news-more {
       animation: none;
+    }
+
+    .news,
+    .news::before,
+    .news::after {
+      transition: none;
     }
   }
 
@@ -400,10 +358,19 @@ const news = [
       gap: 2rem;
     }
 
+    /* Stacked under the hero: the side divider becomes a top divider. */
     .news {
-      border-left: none;
       padding-left: 0;
+      padding-top: 2rem;
       margin-top: 0;
+    }
+
+    .news::before {
+      transform: scaleY(0);
+    }
+
+    .news::after {
+      transform: scaleX(1);
     }
 
     .news-viewport {

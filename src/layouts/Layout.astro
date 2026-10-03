@@ -246,7 +246,7 @@ const currentPath = Astro.url.pathname;
       /* FOOTER */
       footer {
         border-top: 1px solid var(--border);
-        padding: 1.5rem;
+        padding: 0.75rem 1.5rem 1.5rem;
         text-align: center;
         font-size: 0.8rem;
         color: var(--text-muted);
@@ -269,7 +269,7 @@ const currentPath = Astro.url.pathname;
 
       .footer-logo img {
         display: block;
-        height: 56px;
+        height: 48px;
         width: auto;
       }
 
@@ -339,7 +339,7 @@ const currentPath = Astro.url.pathname;
         &copy; {new Date().getFullYear()} Lab for the Energy-AI Paradox, Rutgers University&ndash;New Brunswick
       </p>
       <a class="footer-logo" href="https://www.rutgers.edu" target="_blank" rel="noopener">
-        <img src="/images/rutgers-logo.svg" alt="Rutgers, The State University of New Jersey" />
+        <img src="/images/rutgers-new-brunswick-logo.svg" alt="Rutgers University–New Brunswick" />
       </a>
     </footer>
 
@@ -373,64 +373,6 @@ const currentPath = Astro.url.pathname;
           });
         });
       }
-
-    // Elastic page overscroll: scrolling past the top or bottom with a
-    // mouse wheel / trackpad drags the content a little and it springs
-    // back. Touch devices keep their native overscroll.
-    const pageParts = ["main", "footer"]
-      .map((sel) => document.querySelector<HTMLElement>(sel))
-      .filter((el): el is HTMLElement => !!el);
-
-    if (pageParts.length) {
-      const LIMIT = 140;
-      let pull = 0;
-      let releaseTimer: number | undefined;
-
-      const rubber = (x: number) =>
-        Math.sign(x) * LIMIT * (1 - 1 / ((Math.abs(x) * 0.55) / LIMIT + 1));
-
-      const render = (animate: boolean) => {
-        // Offset with `top` rather than `transform`: a transform puts the
-        // content on its own compositing layer, which the header's
-        // backdrop blur can fail to pick up (the glass goes flat).
-        for (const el of pageParts) {
-          el.style.position = "relative";
-          el.style.transition = animate
-            ? "top 0.5s cubic-bezier(0.2, 0.9, 0.3, 1.12)"
-            : "none";
-          el.style.top = pull ? `${rubber(pull)}px` : "";
-        }
-      };
-
-      window.addEventListener(
-        "wheel",
-        (e) => {
-          // Inner scrollers (e.g. home-page News) handle their own
-          // overscroll; pinch-zoom arrives as ctrl+wheel.
-          if (e.defaultPrevented || e.ctrlKey) return;
-          if ((e.target as Element | null)?.closest?.(".news-scroll")) return;
-
-          const root = document.documentElement;
-          const down = e.deltaY > 0;
-          const atTop = window.scrollY <= 0;
-          const atBottom = window.scrollY + window.innerHeight >= root.scrollHeight - 1;
-          if (!pull && !(down ? atBottom : atTop)) return;
-
-          e.preventDefault();
-          const before = pull;
-          pull -= e.deltaY;
-          if ((before > 0 && pull < 0) || (before < 0 && pull > 0)) pull = 0;
-          render(false);
-
-          clearTimeout(releaseTimer);
-          releaseTimer = window.setTimeout(() => {
-            pull = 0;
-            render(true);
-          }, 90);
-        },
-        { passive: false }
-      );
-    }
     </script>
   </body>
 </html>
