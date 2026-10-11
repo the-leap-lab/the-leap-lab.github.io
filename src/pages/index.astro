@@ -93,7 +93,7 @@ const news = [
     </div>
     <div class="highlight-card">
       <h3>Optical Imaging at the Nanoscale</h3>
-      <p>Pushing optical spectroscopy beyond the diffraction limit to image energy transport in real materials and devices.</p>
+      <p>Pushing optical spectroscopy beyond the diffraction limit to image charge and energy transport in real materials and devices.</p>
       <div class="highlight-image-frame">
         <img class="highlight-image" src="/images/optical-imaging.png" alt="Pump-probe optical imaging of a semiconductor wafer" loading="lazy" />
       </div>
@@ -142,6 +142,7 @@ const news = [
     gap: 3rem;
     align-items: stretch;
     padding-bottom: 3rem;
+    margin-top: -0.25rem;
   }
 
   .hero {
@@ -448,7 +449,7 @@ const news = [
   .highlight-image-frame {
     overflow: hidden;
     width: 100%;
-    margin-top: 0.5rem;
+    margin-top: -0.25rem;
     border-radius: 4px;
   }
 
@@ -474,13 +475,12 @@ const news = [
   .highlight-card h3 {
     font-size: 1rem;
     font-weight: 700;
-    margin-bottom: 0.5rem;
+    margin-bottom: 0;
   }
 
   .highlight-card p {
     font-size: 0.9rem;
     color: var(--text-muted);
     line-height: 1.6;
-    flex: 1;
   }
 </style>
